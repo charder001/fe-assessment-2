@@ -19,6 +19,10 @@ h1{
     display: flex;
 }
 
+#radio label{
+    margin-bottom: 1em; 
+}
+
 input {
     display: block;
     margin-bottom: 1em;

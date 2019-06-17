@@ -5,12 +5,14 @@
 var canvas;
 var context;
 var images = {};
-var totalResources = 4;
+var totalResources = 6;
 var numResourcesLoaded = 0;
 var fps = 30;
 var x = 50;
 var y = 185;
 var currentbike = "dirt"
+var currenthelmet = "rider"
+var currentpace = "average"
 
 
 function prepareCanvas(canvasDiv, canvasWidth, canvasHeight)
@@ -27,7 +29,9 @@ function prepareCanvas(canvasDiv, canvasWidth, canvasHeight)
 	loadImage("dirt");
 	loadImage("retro");
 	loadImage("sport");
-	loadImage("rider");
+  loadImage("rider");
+  loadImage("greenrider");
+  loadImage("redrider");
 }
 
 function loadImage(name) {
@@ -54,10 +58,19 @@ function redraw() {
 				
   canvas.width = canvas.width; // clears the canvas 
 
+  if (currentpace === "fast"){
+    context.rotate(-20 * Math.PI / 180);
+    context.drawImage(images[currentbike], x, y - 90);
 
+    context.drawImage(images[currenthelmet], x, y - 90);
+   
+  } else if (currentpace === "average"){
+    context.rotate(0 * Math.PI / 180);
   context.drawImage(images[currentbike], x - 10, y - 125);
 
-  context.drawImage(images["rider"], x - 10, y - 125);
+  context.drawImage(images[currenthelmet], x - 10, y - 125);
+  }
+  
 }
 
 
@@ -78,5 +91,36 @@ retrobutton.onclick = function(){
 var dirtbutton = document.getElementById("dirt")
 dirtbutton.onclick = function(){
   currentbike = "dirt"
+  redraw()
+}
+
+
+var greenbutton = document.getElementById("green")
+greenbutton.onclick = function(){
+  currenthelmet = "greenrider"
+  redraw()
+}
+
+var redbutton = document.getElementById("red")
+redbutton.onclick = function(){
+  currenthelmet = "redrider"
+  redraw()
+}
+
+var blackbutton = document.getElementById("black")
+blackbutton.onclick = function(){
+  currenthelmet = "rider"
+  redraw()
+}
+
+var fastbutton = document.getElementById("fast")
+fastbutton.onclick = function(){
+  currentpace = "fast"
+  redraw()
+}
+
+var averagebutton = document.getElementById("average")
+averagebutton.onclick = function(){
+  currentpace = "average"
   redraw()
 }
