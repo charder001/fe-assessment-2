@@ -1,0 +1,20 @@
+<% include partials/header %>
+<head>
+        <link rel="stylesheet" type="text/css" href="/login.css">
+</head>
+
+<main>
+    <%if (currentUser.profilePicture) { %>
+<img id="profilepic" src=<%= currentUser.profilePicture %> name="profilePicture">
+<% } %>
+<h1>Welcome <%= currentUser.firstName %>, you're logged in to Note!</h1>
+</form>
+<a href="/update">Update your profile</a>
+<form method="get" action="/signout">
+    <button>Logout</button>
+</form>
+<form action="/users/delete" method="get">
+    <button class="deleteProfile" type="submit">Delete account</button>
+</form>
+</main>
+<% include partials/footer %>
